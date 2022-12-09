@@ -15,13 +15,15 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
-    testImplementation("org.slf4j:slf4j-simple:2.0.4")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.22")
+    testImplementation("org.slf4j:slf4j-simple:2.0.5")
+    testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
+    testImplementation("io.kotest:kotest-assertions-core:5.5.4")
+
 }
 
 tasks.test {
     useJUnitPlatform()
-    finalizedBy("allureReport")
 }
 
 allure {
