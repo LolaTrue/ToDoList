@@ -27,7 +27,9 @@ dependencies {
 }
 
 tasks.test {
-    useJUnitPlatform()
+    //useJUnitPlatform()
+    useTestNG()
+    finalizedBy("allureReport")
 }
 
 allure {
