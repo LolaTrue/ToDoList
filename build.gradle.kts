@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm") version "1.7.20"
     application
     id("io.qameta.allure") version "2.11.2"
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
 group = "org.example"
@@ -11,6 +12,13 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+detekt {
+    toolVersion = "1.22.0"
+    config = files("config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
+    ignoreFailures = true
 }
 
 dependencies {
@@ -24,6 +32,18 @@ dependencies {
     testImplementation("org.junit.platform:junit-platform-suite:1.9.0")
     testImplementation("io.cucumber:cucumber-java8:7.8.1")
     testImplementation("io.cucumber:cucumber-junit-platform-engine:7.8.1")
+
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.22.0")
+}
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        txt.required.set(true)
+        sarif.required.set(true)
+        md.required.set(true)
+    }
 }
 
 tasks.test {
